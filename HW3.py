@@ -35,7 +35,7 @@ stringVar20 = stringVar11
 stringVar21 = stringVar12
 integerVar22 = integerVar13
 stringVar23 = stringVar14
-Var24 = stringVar15
+stringVar24 = stringVar15
 integerVar25 = 6
 
 #3. Take all the variables you labeled as "integer", add them together, and print the result.
