@@ -24,5 +24,5 @@
 import random
 temperature = random.randint(1,30)
 if temperature > 20:
-    print("it is hot")
-
+    if temperature > 10:
+        
