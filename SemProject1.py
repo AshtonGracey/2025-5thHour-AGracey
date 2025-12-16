@@ -86,33 +86,82 @@ enemyDict = {
 #1. Rolling for 'initiative' to see who goes first. This is determined by rolling a
 #20-sided die (d20) and adding their initiative modifier (If the roll is the same,
 #assume the hero goes first).
-galeInit = random.randint(1,20)+1
-goblininit = random.randint(1,20)
-if galeInit >=goblininit:
-    print("Gale Goes First")
-else :print("Gale Goes Second")
+player1 = random.randint(1,20)
+player2 = random.randint(1,20)
+if player1 > player2:
+    print("hero goes first")
+    player1first = True
+else :
+    print("hero goes second")
+    player1first = False
 #2. Rolling to attack.This is determined by rolling a 20-sided die (d20) and adding their
 #attack modifier. The attack hits if it matches or is higher than the target's Armor Class (AC).
 #If the d20 rolled to attack is an unmodified ("natural") 20, the attack automatically hits and
 #the character deals double damage. If the d20 rolled to attack is an unmodified ("natural") 1,
 #the attack automatically misses
-galeattackroll = random.randint(1,20)
-goblinattackroll = random.randint(1,20)
-galeac = 14
-goblinac = 12
-if galeattackroll +6 >= goblinac:
-    if galeattackroll =< 20:
-    print( "Gale rolled a 20")
-    else :
-else: print("it is Goblins turn now")
-if enemyDict["Goblin"]["HP"] <= 0 :
-    print("the goblin is dead")
-else: print("its now the goblin's turn")
 
 #3. If the attack hits, roll damage and subtract it from the target's hit points.
 
 #4. The second in initiative rolls to attack (and rolls damage) afterwards.
 
 #5. Repeat steps 2-5 until one of the characters is dead.
+while partyDict["Gale"]["HP"] >0 and enemyDict["Goblin"]["HP"] > 0:
+    if player1first == True:
+        print("Gale goes first")
+        player1attack = random.randint(1,20)
+        print(player1attack)
+        if player1attack == 20 :
+            enemyDict["Goblin"]["HP"] -= (partyDict["Gale"]["Damage"] *2)
+            print(f"Gale hits Goblin for{(partyDict["Gale"]["Damage"] *2)}")
+        elif player1attack == 1:
+            print("roll natural 1, Miss")
+        elif player1attack + partyDict["Gale"]["AtkMod"] >= enemyDict["Goblin"]["AC"]:
+            enemyDict["Goblin"]["HP"] -= (partyDict["Gale"]["Damage"])
+            print(f"Gale hits Goblin for{(partyDict["Gale"]["Damage"])}")
+        else:
+            print("Gale Missed Attack")
+        player2attack = random.randint(1,20)
+        print(player2attack)
+        if player2attack == 20 :
+            partyDict["Gale"]["HP"] -= (enemyDict["Goblin"]["Damage"] * 2)
+            print(f"Goblin hits Gale for{(enemyDict["Goblin"]["Damage"] * 2)}")
+        elif player2attack ==1:
+            print("roll natural 1, Miss")
+        elif player2attack +enemyDict["Goblin"]["AtkMod"] >= partyDict["Gale"]["AC"]:
+            partyDict ["Gale"]["HP"] -= (enemyDict["Goblin"]["Damage"])
+            print(f"Goblin hits Gale for{(enemyDict["Goblin"]["Damage"])}")
+        else:
+            print("Goblin Missed Attack")
+    else:
+        print("Goblin goes first")
+        player2attack = random.randint(1,20)
+        print(player2attack)
+        if player2attack == 20 :
+            partyDict["Gale"]["HP"] -= (enemyDict["Goblin"]["Damage"] * 2)
+            print(f"Goblin hits Gale for{(enemyDict["Goblin"]["Damage"] * 2)}")
+        elif player2attack ==1:
+            print("roll natural 1, Miss")
+        elif player2attack +enemyDict["Goblin"]["AtkMod"] >= partyDict["Gale"]["AC"]:
+            partyDict ["Gale"]["HP"] -= (enemyDict["Goblin"]["Damage"])
+            print(f"Goblin hits Gale for{(enemyDict["Goblin"]["Damage"])}")
+        else:
+            print("Goblin Missed Attack")
+            player1attack = random.randint(1, 20)
+            print(player1attack)
+        if player1attack == 20:
+            enemyDict["Goblin"]["HP"] -= (partyDict["Gale"]["Damage"] * 2)
+            print(f"Gale hits Goblin for{(partyDict["Gale"]["Damage"] * 2)}")
+        elif player1attack == 1:
+            print("roll natural 1, Miss")
+        elif player1attack + partyDict["Gale"]["AtkMod"] >= enemyDict["Goblin"]["AC"]:
+            enemyDict["Goblin"]["HP"] -= (partyDict["Gale"]["Damage"])
+            print(f"Gale hits Goblin for{(partyDict["Gale"]["Damage"])}")
+        else:
+            print("Gale Missed Attack")
+
+
+
+
+
 
 
